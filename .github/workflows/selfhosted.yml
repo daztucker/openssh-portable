@@ -21,6 +21,7 @@ jobs:
       REMOTE: ${{ startsWith(matrix.host, 'remote') }}
       VM: ${{ startsWith(matrix.host, 'libvirt') || startsWith(matrix.host, 'persist') }}
       SSHFS: ${{ startsWith(matrix.host, 'libvirt') || startsWith(matrix.host, 'persist') || startsWith(matrix.host, 'remote') }}
+      BIGENDIAN: ${{ matrix.target == 'aix51' }}
     strategy:
       fail-fast: false
       # We use a matrix in two parts: firstly all of the VMs are tested with the
@@ -96,7 +97,6 @@ jobs:
           - { target: ARM64, config: pam, host: ARM64 }
           # Physical hosts with remote runners.
           - { target: debian-riscv64, config: default, host: remote-debian-riscv64 }
-
           - { target: openwrt-mips, config: default, host: remote-openwrt-mips }
           - { target: openwrt-mipsel, config: default, host: remote-openwrt-mipsel }
     steps:
@@ -147,6 +147,39 @@ jobs:
       if: always() && env.SSHFS == 'true'
       run: fusermount -u ${GITHUB_WORKSPACE} || true
       working-directory: ${{ runner.temp }}
+
+    - name: bigendian interop - mount regress
+      if: env.SSHFS == 'true' && env.BIGENDIAN == 'true'
+      run: |
+        sshfs_mount regress
+        vmrun "sudo mkdir -p $(dirname ${GITHUB_WORKSPACE})"
+        vmrun "sudo ln -s ~/$(basename ${GITHUB_WORKSPACE}) ${GITHUB_WORKSPACE}"
+      working-directory: ${{ runner.temp }}
+
+    - name: bigendian interop - host build
+      if: env.SSHFS == 'true' && env.BIGENDIAN == 'true'
+      run: |
+        vmrun 'sudo chown -R $LOGNAME .'
+        ./.github/configure.sh ${{ matrix.config }}
+        sudo make clean
+        make
+
+    - name: bigendian interop - test
+      if: env.SSHFS == 'true' && env.BIGENDIAN == 'true'
+      env:
+        TEST_SSH_UNSAFE_PERMISSIONS: 1
+      run: |
+        set -x
+        echo "#!/bin/sh" >remote_sshd
+        echo 'exec vmrun exec /home/builder/${GITHUB_WORKSPACE}/sshd' >>regress/remote_sshd
+        chmod 755 regress/remote_sshd
+        make t-exec TEST_SSH_SSHD=`pwd`/remote_sshd LTESTS="try-ciphers kextype"
+
+    - name: bigendian interop - unmount regress
+      if: always() && env.SSHFS == 'true' && env.BIGENDIAN == 'true'
+      run: fusermount -u ${GITHUB_WORKSPACE}/regress || true
+      working-directory: ${{ runner.temp }}
+
     - name: shutdown VM
       if: always() && env.VM == 'true'
       run: vmshutdown
