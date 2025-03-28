@@ -144,6 +144,8 @@ case "$config" in
 	TCMALLOC_STACKTRACE_METHOD=generic_fp
 	TEST_SSH_SSHD_ENV="TCMALLOC_STACKTRACE_METHOD=generic_fp"
 	export TCMALLOC_STACKTRACE_METHOD TEST_SSH_SSHD_ENV
+	# Make sure it's also propagated to anything run by sudo.
+	SUDO="sudo env TCMALLOC_STACKTRACE_METHOD=generic_fp"
 	;;
     krb5|heimdal)
 	CONFIGFLAGS="--with-kerberos5"
