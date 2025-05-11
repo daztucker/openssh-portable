@@ -1,5 +1,11 @@
 #!/bin/sh
 
+echo passwd:
+sudo grep runner /etc/passwd
+
+echo shadow:
+sudo grep runner /etc/shadow
+
 PACKAGES=""
 
  . .github/configs $@
