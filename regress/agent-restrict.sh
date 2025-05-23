@@ -84,7 +84,7 @@ reset_keys() {
 	_command=""
 	case "$_whichcmd" in
 	authinfo)	_command="cat \$SSH_USER_AUTH" ;;
-	keylist)		_command="$SSHADD -L | cut -d' ' -f-2 | sort" ;;
+	keylist)		_command="$SSHADD -L | cut -d' ' -f-2 | env LC_ALL=C sort" ;;
 	*)		fatal "unsupported command $_whichcmd" ;;
 	esac
 	trace "reset keys"
