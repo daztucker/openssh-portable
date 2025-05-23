@@ -332,7 +332,7 @@ if test ! -z "\$me" ; then
 	cat \$SSH_USER_AUTH
 fi
 echo AGENT
-$SSHADD -L | egrep "^ssh" | cut -d" " -f-2 | sort
+$SSHADD -L | egrep "^ssh" | cut -d" " -f-2 | env LC_ALL=C sort
 if test -z "\$next" ; then 
 	touch $OBJ/done
 	echo "FINISH"
