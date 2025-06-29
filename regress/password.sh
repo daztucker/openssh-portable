@@ -21,6 +21,7 @@ echo "PasswordAuthentication yes" >>sshd_proxy
 # Keep a counter of the number of times it has been called and
 # reply with the next line of the replypass file.
 cat >${OBJ}/replypass.sh <<EOD
+#!/bin/sh
 n=\`cat ${OBJ}/replypass.N\`
 awk "NR==\$n" ${OBJ}/replypass
 echo \$(( \$n + 1 )) >${OBJ}/replypass.N
