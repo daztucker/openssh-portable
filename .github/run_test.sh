@@ -45,7 +45,8 @@ fi
 # again.
 case "$1" in
     openssl-3.*)
-	${SUDO} cp /lib64/libcrypto.so.3 /opt/openssl/lib64/libcrypto.so.3
+	ldd $(which ssh)
+	${SUDO} cp /usr/lib64/libcrypto.so.3 /opt/openssl/lib64/libcrypto.so.3
 	if [ -z "${TEST_SSH_SSHD_CONFOPTS}" ]; then
 		SSHD_CONFOPTS=AcceptEnv=OpenSSL3_ABI_Test
 	fi
