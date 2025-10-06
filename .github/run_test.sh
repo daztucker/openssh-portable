@@ -15,6 +15,7 @@ if [ ! -z "$SUDO" ] && [ ! -z "$TEST_SSH_HOSTBASED_AUTH" ]; then
     $SUDO mkdir -p $sshconf
     $SUDO cp -p /etc/ssh/ssh_host*key* $sshconf
     $SUDO make install
+    ls -l /etc/ssh/*key* $sshconf/*key*
     for key in $sshconf/ssh_host*key*.pub; do
         echo `hostname` `cat $key` | \
             $SUDO tee -a $sshconf/ssh_known_hosts >/dev/null
