@@ -14,6 +14,12 @@ if [ ! -z "$SUDO" ] && [ ! -z "$TEST_SSH_HOSTBASED_AUTH" ]; then
     echo "EnableSSHKeysign yes" | $SUDO tee $sshconf/ssh_config >/dev/null
     $SUDO mkdir -p $sshconf
     #$SUDO cp -p /etc/ssh/ssh_host*key* $sshconf
+    sleep 10
+    echo /etc/ssh/ssh_host_ed25519
+    cat /etc/ssh/ssh_host_ed25519
+    echo /etc/ssh/ssh_host_ed25519.pub
+    cat /etc/ssh/ssh_host_ed25519.pub
+    sleep 10
     $SUDO make install
     ls -l /etc/ssh/*key* $sshconf/*key*
     for key in $sshconf/ssh_host*key*.pub; do
