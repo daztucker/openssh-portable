@@ -16,9 +16,9 @@ if [ ! -z "$SUDO" ] && [ ! -z "$TEST_SSH_HOSTBASED_AUTH" ]; then
     #$SUDO cp -p /etc/ssh/ssh_host*key* $sshconf
     sleep 10
     echo /etc/ssh/ssh_host_ed25519_key
-    cat /etc/ssh/ssh_host_ed25519_key
+    $SUDO cat /etc/ssh/ssh_host_ed25519_key
     echo /etc/ssh/ssh_host_ed25519_key.pub
-    cat /etc/ssh/ssh_host_ed25519_key.pub
+    $SUDO cat /etc/ssh/ssh_host_ed25519_key.pub
     sleep 10
     $SUDO make install
     ls -l /etc/ssh/*key* $sshconf/*key*
