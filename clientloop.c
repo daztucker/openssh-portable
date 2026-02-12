@@ -64,7 +64,6 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
-#include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/queue.h>
 
@@ -77,8 +76,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
-#include <termios.h>
-#include <pwd.h>
 #include <unistd.h>
 #include <limits.h>
 
@@ -91,9 +88,7 @@
 #include "channels.h"
 #include "dispatch.h"
 #include "sshkey.h"
-#include "cipher.h"
 #include "kex.h"
-#include "myproposal.h"
 #include "log.h"
 #include "misc.h"
 #include "readconf.h"
@@ -103,7 +98,6 @@
 #include "atomicio.h"
 #include "sshpty.h"
 #include "match.h"
-#include "msg.h"
 #include "ssherr.h"
 #include "hostfile.h"
 

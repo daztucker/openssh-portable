@@ -46,7 +46,6 @@
 #include <sys/ioctl.h>
 #include <sys/un.h>
 #include <sys/socket.h>
-#include <sys/time.h>
 #include <sys/queue.h>
 
 #include <netinet/in.h>
@@ -76,8 +75,6 @@
 #include "channels.h"
 #include "compat.h"
 #include "canohost.h"
-#include "sshkey.h"
-#include "authfd.h"
 #include "pathnames.h"
 #include "match.h"
 

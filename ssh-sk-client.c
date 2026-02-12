@@ -21,7 +21,6 @@
 #include <sys/socket.h>
 #include <sys/wait.h>
 
-#include <fcntl.h>
 #include <limits.h>
 #include <errno.h>
 #include <signal.h>
@@ -36,7 +35,6 @@
 #include "sshbuf.h"
 #include "sshkey.h"
 #include "msg.h"
-#include "digest.h"
 #include "pathnames.h"
 #include "ssh-sk.h"
 #include "misc.h"

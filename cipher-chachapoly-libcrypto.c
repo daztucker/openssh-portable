@@ -23,13 +23,11 @@
 #if defined(HAVE_EVP_CHACHA20) && !defined(HAVE_BROKEN_CHACHA20)
 
 #include <sys/types.h>
-#include <stdarg.h> /* needed for log.h */
 #include <string.h>
 #include <stdio.h>  /* needed for misc.h */
 
 #include <openssl/evp.h>
 
-#include "log.h"
 #include "sshbuf.h"
 #include "ssherr.h"
 #include "cipher-chachapoly.h"

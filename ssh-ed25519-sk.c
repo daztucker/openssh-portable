@@ -21,7 +21,6 @@
 
 #define SSHKEY_INTERNAL
 #include <sys/types.h>
-#include <limits.h>
 
 #include "crypto_api.h"
 
@@ -32,7 +31,6 @@
 #include "sshbuf.h"
 #include "sshkey.h"
 #include "ssherr.h"
-#include "ssh.h"
 #include "digest.h"
 
 /* Reuse some ED25519 internals */

@@ -43,7 +43,6 @@
 #include "pathnames.h"
 #include "log.h"
 #include "ssh.h"
-#include "uidswap.h"
 
 static char *
 ssh_askpass(char *askpass, const char *msg, const char *env_hint)

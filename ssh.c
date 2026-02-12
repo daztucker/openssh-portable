@@ -43,12 +43,8 @@
 #include "includes.h"
 
 #include <sys/types.h>
-#include <sys/ioctl.h>
-#include <sys/queue.h>
-#include <sys/resource.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
-#include <sys/time.h>
 #include <sys/wait.h>
 #include <sys/utsname.h>
 
@@ -81,7 +77,6 @@
 #include "xmalloc.h"
 #include "ssh.h"
 #include "ssh2.h"
-#include "canohost.h"
 #include "compat.h"
 #include "cipher.h"
 #include "packet.h"
@@ -91,7 +86,6 @@
 #include "authfd.h"
 #include "authfile.h"
 #include "pathnames.h"
-#include "dispatch.h"
 #include "clientloop.h"
 #include "log.h"
 #include "misc.h"
@@ -99,12 +93,9 @@
 #include "sshconnect.h"
 #include "kex.h"
 #include "mac.h"
-#include "sshpty.h"
 #include "match.h"
-#include "msg.h"
 #include "version.h"
 #include "ssherr.h"
-#include "myproposal.h"
 #include "utf8.h"
 
 #ifdef ENABLE_PKCS11

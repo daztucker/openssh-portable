@@ -56,7 +56,6 @@
 #include "log.h"
 #include "compat.h"
 #include "sshbuf.h"
-#include "ssherr.h"
 
 #define TTY_OP_END		0
 /*

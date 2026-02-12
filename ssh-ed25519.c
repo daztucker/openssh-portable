@@ -30,7 +30,6 @@
 #define SSHKEY_INTERNAL
 #include "sshkey.h"
 #include "ssherr.h"
-#include "ssh.h"
 
 static void
 ssh_ed25519_cleanup(struct sshkey *k)

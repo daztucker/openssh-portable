@@ -35,16 +35,12 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
-#include <netdb.h>
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
 #include <unistd.h>
-#if defined(HAVE_STRNVIS) && defined(HAVE_VIS_H) && !defined(BROKEN_STRNVIS)
-#include <vis.h>
-#endif
 
 #include "xmalloc.h"
 #include "ssh.h"
@@ -57,7 +53,6 @@
 #include "kex.h"
 #include "sshconnect.h"
 #include "authfile.h"
-#include "dh.h"
 #include "authfd.h"
 #include "log.h"
 #include "misc.h"
@@ -67,11 +62,9 @@
 #include "canohost.h"
 #include "msg.h"
 #include "pathnames.h"
-#include "uidswap.h"
 #include "hostfile.h"
 #include "ssherr.h"
 #include "utf8.h"
-#include "ssh-sk.h"
 #include "sk-api.h"
 
 #ifdef GSSAPI

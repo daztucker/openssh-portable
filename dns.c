@@ -38,7 +38,6 @@
 
 #include "xmalloc.h"
 #include "sshkey.h"
-#include "ssherr.h"
 #include "dns.h"
 #include "log.h"
 #include "digest.h"

@@ -24,7 +24,6 @@
 #include "openbsd-compat/openssl-compat.h"
 #include <openssl/bn.h>
 #include <openssl/evp.h>
-#include <openssl/err.h>
 
 #include <stdarg.h>
 #include <string.h>
@@ -34,7 +33,6 @@
 #define SSHKEY_INTERNAL
 #include "sshkey.h"
 #include "digest.h"
-#include "log.h"
 
 static u_int
 ssh_rsa_size(const struct sshkey *k)

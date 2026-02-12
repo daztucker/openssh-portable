@@ -28,7 +28,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 #include <signal.h>
 
 #ifdef WITH_OPENSSL
@@ -43,7 +42,6 @@
 #include "misc.h"
 
 #include "ssherr.h"
-#include "xmalloc.h"
 
 struct kexalg {
 	char *name;

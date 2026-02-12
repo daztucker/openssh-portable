@@ -27,7 +27,6 @@
 
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <sys/queue.h>
 
 #include <errno.h>
 #include <string.h>
@@ -35,7 +34,6 @@
 
 #include "ssh2.h"
 #include "sshbuf.h"
-#include "ssherr.h"
 #include "packet.h"
 #include "channels.h"
 #include "compat.h"

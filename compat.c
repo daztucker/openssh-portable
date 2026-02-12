@@ -28,7 +28,6 @@
 #include <sys/types.h>
 
 #include <stdlib.h>
-#include <string.h>
 #include <stdarg.h>
 
 #include "xmalloc.h"

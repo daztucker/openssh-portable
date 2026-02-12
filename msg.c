@@ -26,16 +26,13 @@
 #include "includes.h"
 
 #include <sys/types.h>
-#include <sys/uio.h>
 
 #include <errno.h>
-#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <stdarg.h>
 
 #include "sshbuf.h"
-#include "ssherr.h"
 #include "log.h"
 #include "atomicio.h"
 #include "msg.h"

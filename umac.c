@@ -77,7 +77,6 @@
 #include <endian.h>
 #include <string.h>
 #include <stdarg.h>
-#include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <stddef.h>

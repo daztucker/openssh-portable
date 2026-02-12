@@ -31,7 +31,6 @@
 #include <sys/types.h>
 
 #include <stdio.h>
-#include <string.h>
 #include <signal.h>
 
 #include <openssl/bn.h>
@@ -40,7 +39,6 @@
 #include "sshkey.h"
 #include "kex.h"
 #include "sshbuf.h"
-#include "digest.h"
 #include "ssherr.h"
 
 static int

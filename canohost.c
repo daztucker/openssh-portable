@@ -30,7 +30,6 @@
 #include <unistd.h>
 
 #include "xmalloc.h"
-#include "packet.h"
 #include "log.h"
 #include "canohost.h"
 #include "misc.h"

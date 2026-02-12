@@ -33,7 +33,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <poll.h>
 
 #ifdef WITH_OPENSSL
 #include <openssl/crypto.h>
@@ -54,7 +53,6 @@
 #include "match.h"
 #include "misc.h"
 #include "dispatch.h"
-#include "monitor.h"
 #include "myproposal.h"
 
 #include "ssherr.h"

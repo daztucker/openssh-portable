@@ -22,7 +22,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "sshbuf.h"
 #include "digest.h"
 #include "hmac.h"
 

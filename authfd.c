@@ -43,21 +43,17 @@
 
 #include <fcntl.h>
 #include <stdlib.h>
-#include <signal.h>
 #include <string.h>
 #include <stdarg.h>
 #include <unistd.h>
 #include <errno.h>
 
-#include "xmalloc.h"
 #include "ssh.h"
 #include "sshbuf.h"
 #include "sshkey.h"
 #include "authfd.h"
-#include "cipher.h"
 #include "log.h"
 #include "atomicio.h"
-#include "misc.h"
 #include "ssherr.h"
 
 #define MAX_AGENT_IDENTITIES	2048		/* Max keys in agent reply */
