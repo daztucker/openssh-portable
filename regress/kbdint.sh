@@ -81,7 +81,6 @@ for i in 0 1 2 3 4 5 6 7 8 9; do printf '1\n2\n3\n4\n5\n6\n7\n8\n9\n'; done \
     >${OBJ}/replypass
 echo 1 >${OBJ}/replypass.N
 ${SSH} $opts -F $OBJ/ssh_proxy somehost true
-fail foo
 if [ $? -eq 0 ]; then
 	fail "ssh unexpectedly succeeded with password spam"
 fi
