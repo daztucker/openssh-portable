@@ -410,6 +410,7 @@ jobs:
       matrix:
         target:
           - "11.4-gcc"
+          - "11.4-clang-19"
         config: [default]
     runs-on: ubuntu-latest
     steps:
