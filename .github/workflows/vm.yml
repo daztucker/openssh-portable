@@ -168,7 +168,9 @@ jobs:
         usesh: true
         prepare: |
           /usr/sbin/pkg_add sudo
-          /usr/sbin/useradd -m builder
+          openssl rand -base64 9 >$GITHUB_WORKSPACE/regress/password
+          pw=$(tr -d '\n' <$GITHUB_WORKSPACE/regress/password | pwhash)
+          /usr/sbin/useradd -m -p "${pw}" builder
           echo "builder ALL=(ALL:ALL) NOPASSWD: ALL" >>/usr/pkg/etc/sudoers
           mkdir -p /var/empty /usr/local/etc
           cp $GITHUB_WORKSPACE/moduli /usr/local/etc/moduli
@@ -200,11 +202,17 @@ jobs:
     - name: "PAM: make"
       shell: netbsd {0}
       run: cd $GITHUB_WORKSPACE && sudo -u builder make -j4
-    - name: "PAM: make t-exec"
+    - name: "PAM: make t-exec UsePAM=no"
       shell: netbsd {0}
       run: |
         cd $GITHUB_WORKSPACE
-        sudo -u builder env SUDO=sudo SSHD_CONFOPTS="UsePam yes" make t-exec
+        sudo -u builder env SUDO=sudo make t-exec
+    - name: "PAM: make t-exec UsePAM=yes"
+      shell: netbsd {0}
+      run: |
+        cd $GITHUB_WORKSPACE
+        cp regress/password regress/kbdintpw
+        sudo -u builder env SUDO=sudo TEST_SSH_SSHD_CONFOPTS="UsePam yes" make t-exec
 
 
   omnios:
