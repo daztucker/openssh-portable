@@ -96,7 +96,9 @@ jobs:
         usesh: true
         prepare: |
           pkg install -y sudo
-          pw useradd builder -m
+          openssl rand -base64 9 >$GITHUB_WORKSPACE/regress/password
+          pw useradd builder -m -h0 <$GITHUB_WORKSPACE/regress/password
+          chown builder $GITHUB_WORKSPACE/regress/password
           echo "builder ALL=(ALL:ALL) NOPASSWD: ALL" >>/usr/local/etc/sudoers
           mkdir -p /var/empty /usr/local/etc
           cp $GITHUB_WORKSPACE/moduli /usr/local/etc/moduli
@@ -117,7 +119,7 @@ jobs:
       shell: freebsd {0}
       run: |
         cd $GITHUB_WORKSPACE
-        sudo -u builder env SUDO=sudo make tests
+        sudo -u builder env SUDO=sudo make tests SKIP_LTESTS=scp3
 
     - name: "PAM: configure"
       shell: freebsd {0}
@@ -128,11 +130,17 @@ jobs:
     - name: "PAM: make"
       shell: freebsd {0}
       run: cd $GITHUB_WORKSPACE && sudo -u builder make -j4
-    - name: "PAM: make t-exec"
+    - name: "PAM: make t-exec UsePAM=no"
       shell: freebsd {0}
       run: |
         cd $GITHUB_WORKSPACE
-        sudo -u builder env SUDO=sudo SSHD_CONFOPTS="UsePam yes" make t-exec
+        sudo -u builder env SUDO=sudo make t-exec SKIP_LTESTS=scp3
+    - name: "PAM: make t-exec UsePAM=yes"
+      shell: freebsd {0}
+      run: |
+        cd $GITHUB_WORKSPACE
+        cp regress/password regress/kbdintpw
+        sudo -u builder env SUDO=sudo TEST_SSH_SSHD_CONFOPTS="UsePam yes" make t-exec SKIP_LTESTS=scp3
 
 
   netbsd:
