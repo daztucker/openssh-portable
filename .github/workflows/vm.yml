@@ -2,11 +2,7 @@
 # Security -> Actions -> Variables) to restrict the tests that are run
 # The supported variables are:
 #
-# RUN_ONLY_TARGET_CONFIG: Run only the single matching target and config,
-#   separated by spaces, eg "ubuntu-latest default".  All other tests will
-#   fail immediately.
-#
-# LTESTS: Override the set of tests run.
+# RUN_ONLY_PLATFORM: run only tests on specified platform.
 
 name: CI VM
 on:
@@ -18,7 +14,7 @@ on:
 jobs:
   dragonflybsd:
     name: "dragonflybsd-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'dragonflybsd')
     strategy:
       fail-fast: false
       matrix:
@@ -78,7 +74,7 @@ jobs:
 
   freebsd:
     name: "freebsd-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'freebsd')
     strategy:
       fail-fast: false
       matrix:
@@ -141,7 +137,7 @@ jobs:
 
   netbsd:
     name: "netbsd-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'netbsd')
     strategy:
       fail-fast: false
       matrix:
@@ -205,7 +201,7 @@ jobs:
 
   omnios:
     name: "omnios-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'omnios')
     strategy:
       fail-fast: false
       matrix:
@@ -256,7 +252,7 @@ jobs:
 
   openbsd:
     name: "openbsd-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'openbsd')
     strategy:
       fail-fast: false
       matrix:
@@ -312,7 +308,7 @@ jobs:
     # plaform (the latest snapshot) and most recent upstream code (or at least
     # the most recent code in the github mirror) instead of OpenSSH Portable.
     name: "openbsd-current-upstream"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'openbsd')
     strategy:
       fail-fast: false
     runs-on: ubuntu-latest
@@ -408,7 +404,7 @@ jobs:
 
   solaris:
     name: "solaris-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'solaris')
     strategy:
       fail-fast: false
       matrix:
