@@ -72,6 +72,7 @@ jobs:
         cd $GITHUB_WORKSPACE
         sudo -u builder env SUDO=sudo SSHD_CONFOPTS="UsePam yes" make t-exec
 
+
   freebsd:
     name: "freebsd-${{ matrix.target }}"
     if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'freebsd')
@@ -141,6 +142,40 @@ jobs:
         cd $GITHUB_WORKSPACE
         cp regress/password regress/kbdintpw
         sudo -u builder env SUDO=sudo TEST_SSH_SSHD_CONFOPTS="UsePam yes" make t-exec SKIP_LTESTS=scp3
+
+
+  haiku:
+    name: "haiku-${{ matrix.target }}"
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'haiku')
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - "r1beta5"
+        config: [default]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - name: autoreconf
+      run: sh -c autoreconf
+
+    - name: start haiku ${{ matrix.target }} VM
+      uses: vmactions/haiku-vm@v1
+      with:
+        release: ${{ matrix.target }}
+        usesh: true
+        prepare: |
+          mkdir -p /var/empty
+
+    - name: configure
+      shell: haiku {0}
+      run: set; cd $GITHUB_WORKSPACE && pwd; ls -l work; ./configure
+    - name: make
+      shell: haiku {0}
+      run: cd $GITHUB_WORKSPACE && make -j4
+    - name: make tests
+      shell: haiku {0}
+      run: cd $GITHUB_WORKSPACE && make tests
 
 
   netbsd:
