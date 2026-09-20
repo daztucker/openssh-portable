@@ -811,7 +811,8 @@ start_compression_out(struct ssh *ssh, int level)
 	debug("Enabling compression at level %d.", level);
 	if (ssh->state->compression_out_started == 1)
 		deflateEnd(&ssh->state->compression_out_stream);
-	switch (deflateInit(&ssh->state->compression_out_stream, level)) {
+	switch (deflateInit2(&ssh->state->compression_out_stream,
+	    Z_BEST_SPEED, Z_DEFLATED, 15, 8, Z_HUFFMAN_ONLY)) {
 	case Z_OK:
 		ssh->state->compression_out_started = 1;
 		break;
