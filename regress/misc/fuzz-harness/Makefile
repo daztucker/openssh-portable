@@ -109,7 +109,7 @@ hostfile_fuzz: hostfile_fuzz.o $(SK_NULL_OBJS) $(COMMON_DEPS)
 	$(CXX) -o $@ hostfile_fuzz.o $(SK_NULL_OBJS) $(LDFLAGS) $(FUZZ_FLAGS) $(LIBS)
 
 mux_fuzz: mux_fuzz.o mux_fuzz_helper.o $(SK_NULL_OBJS) $(COMMON_DEPS)
-	$(CXX) -o $@ mux_fuzz.o mux_fuzz_helper.o $(SK_NULL_OBJS) ../../../readconf.o -Wl,--wrap=ssh_packet_disconnect,--wrap=sshpkt_fatal,--wrap=ask_permission,--wrap=channel_setup_local_fwd_listener,--wrap=channel_connect_stdio_fwd,--wrap=channel_request_remote_forwarding,--wrap=channel_request_rforward_cancel,--wrap=channel_cancel_lport_listener $(LDFLAGS) $(FUZZ_FLAGS) $(LIBS) -lz
+	$(CXX) -o $@ mux_fuzz.o mux_fuzz_helper.o $(SK_NULL_OBJS) ../../../readconf.o -Wl,--wrap=ssh_packet_disconnect,--wrap=sshpkt_fatal,--wrap=ask_permission,--wrap=channel_setup_local_fwd_listener,--wrap=channel_connect_stdio_fwd,--wrap=channel_request_remote_forwarding,--wrap=channel_request_rforward_cancel,--wrap=channel_cancel_lport_listener,--wrap=channel_request_agent_forwarding $(LDFLAGS) $(FUZZ_FLAGS) $(LIBS) -lz
 
 mux_fuzz_helper.o: mux_fuzz_helper.c ../../../mux.c
 
